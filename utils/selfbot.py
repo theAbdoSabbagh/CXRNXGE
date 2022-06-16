@@ -4,8 +4,6 @@ from rich import print
 from utils.console import data, title
 from utils.useful import get_data
 
-import discord
-
 config_data = get_data()
 
 bot = commands.Bot(
