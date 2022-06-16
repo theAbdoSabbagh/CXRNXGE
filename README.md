@@ -3,11 +3,13 @@
 [![Issues](https://img.shields.io/github/issues/Sxvxgee/CXRNXGE)](https://github.com/Sxvxgee/CXRNXGE/issues) [![Pull Requests](https://img.shields.io/github/issues-pr/Sxvxgee/CXRNXGE)](https://github.com/Sxvxgee/CXRNXGE/pulls) [![Languages](https://img.shields.io/github/languages/top/Sxvxgee/CXRNXGE)](https://github.com/Sxvxgee/CXRNXGE/search?l=kotlin&type=code) [![License: MIT](https://img.shields.io/github/license/Sxvxgee/CXRNXGE)](https://mit-license.org/)
 
 ## Features (New ones coming soon)
-- Fast Nitro Sniper & Redeemer.
+- Fast Nitro sniper & redeemer.
 - Deleted messages logger.
 - Leave all group DMs.
-- Auto Bump.
+- Auto-Bump.
 - Automation commands.
+- HypeSquad changer.
+- Advanced error handler.
 - And many more!
 
 ## Installation & Usage
