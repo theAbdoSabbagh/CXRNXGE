@@ -1,9 +1,10 @@
+import asyncio, os
+
 from rich import print
 
 from utils.selfbot import bot
 from utils.useful import get_data
 
-import asyncio, os
 
 config_data = get_data()
 
