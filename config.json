@@ -2,7 +2,7 @@
     "token": "",
     "prefix" : "",
     "owner_ids": [],
+    "blacklisted_channels": [],
     "logged_guilds": [],
-    "logged_channels": [],
-    "blacklisted_channels": []
+    "logged_channels": []
 }
