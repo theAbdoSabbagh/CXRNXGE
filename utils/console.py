@@ -1,4 +1,3 @@
-from rich import print
 from utils.useful import get_version
 
 def title():
