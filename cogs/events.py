@@ -37,9 +37,9 @@ class events(commands.Cog):
         )
         success(f"Sniped code: {code}", header = 'Nitro Sniper')
         data = response.json()
-        if data['message'] == 'This gift has been redeemed already.':
+        if 'This gift has been redeemed already' in data['message']:
           custom('[Nitro Sniper] The code has already been used previously.')
-        elif data['message'] == 'Unknown Gift Code':
+        elif 'Unknown Gift Code' in data['message']:
           custom('[Nitro Sniper] The code is invalid.')
         else:
           custom(f'[Nitro Sniper] {data["message"]}')
