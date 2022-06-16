@@ -14,7 +14,9 @@ bot = commands.Bot(
     case_insensitive=True,
     cache_guilds_at_startup = False,
     owner_ids = config_data['owner_ids'],
-    user_bot = True
+    user_bot = True # Set this as False and set self_bot as True if you'd like to have more than one person use the commands.
+                    # By default user_bot is set to True in this code, making the bot only controllable through the commands ran by the account itself.
+                    # Don't forget to add the account ID to the bot owner_ids at the config.json file. 
 )
 bot._BotBase__cogs = commands.core._CaseInsensitiveDict()
 bot.help_command = None # Might make a better one soon. Will use the subclassed version obviously.
