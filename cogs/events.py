@@ -1,11 +1,10 @@
+import re, discord, requests
+
 from discord.ext import commands
 from discord.ext.commands import Cog
 
-from rich import print, print_json
-
 from utils.useful import custom, get_data, success, failure
 
-import re, discord, requests, json
 
 
 class events(commands.Cog):
