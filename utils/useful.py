@@ -23,16 +23,22 @@ def get_data():
 
 def success(text : str, timestamp : bool = True, header = None):
     header_ = 'Success' if header is None else f'{header} | Success'
-    text = text.replace('\n', f'\n[{header_}] ')
-    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold green][{header_}] {text}[/bold green]" if timestamp else f"[bold green][{header_}] {text}[/bold green]")
+    text = str(text).replace('\n', f"\n[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] \[{header_}] " if timestamp else f"\n\[{header_}] ")
+    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold green]\[{header_}] {text}[/bold green]" if timestamp else f"[bold green]\[{header_}] {text}[/bold green]")
 
 def failure(text : str, timestamp : bool = True, header = None):
     header_ = 'Failure' if header is None else f'{header} | Failure'
-    text = text.replace('\n', f'\n[{header_}] ')
-    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold red][{header_}] {text}[/bold red]" if timestamp else f"[bold red][{header_}] {text}[/bold red]")
+    text = str(text).replace('\n', f"\n[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] \[{header_}] " if timestamp else f"\n\[{header_}] ")
+    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold red]\[{header_}] {text}[/bold red]" if timestamp else f"[bold red]\[{header_}] {text}[/bold red]")
+
+def cmd_error(text : str, timestamp : bool = True, header = None):
+    header_ = 'Command Error' if header is None else f'{header} | Command Error'
+    text = str(text).replace('\n', f"\n[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] \[{header_}] " if timestamp else f"\n\[{header_}] ")
+    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold red]\[{header_}] {text}[/bold red]" if timestamp else f"[bold red]\[{header_}] {text}[/bold red]")
 
 def custom(text : str, timestamp : bool = True, color = 'blue'):
     print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold {color}]{text}[/bold {color}]" if timestamp else f"[bold {color}]{text}[/bold {color}]")
+
 
 async def auto_bump(channel : discord.TextChannel, command : str, delay : int):
     name = channel.name
