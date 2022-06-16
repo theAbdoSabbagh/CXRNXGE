@@ -1,4 +1,4 @@
-import asyncio, time, discord, random
+import asyncio, time, discord, random, requests
 
 from discord.ext import commands
 from discord.ext.commands import Cog, command, is_owner, guild_only
@@ -62,6 +62,44 @@ class utility(commands.Cog):
     self.bot.bumping_channels.append(ctx.channel.id)
     success(f"Started bumping task for channel: #{ctx.channel.name}", header = "Auto Bump")
 
+  @command(aliases = ['hypechange', 'hschange', 'hypesquadchange', 'hype'])
+  @is_owner()
+  async def changehypesquad(self, ctx, house : str):
+    try: await ctx.message.delete()
+    except: pass
+    if self.bot.hype_safe is False:
+      return failure("It's not safe to change the HypeSquad yet.", header = "HypeSquad Changer")
+    houses_to_value = {
+      'bravery' : 1,
+      'brilliance' : 2,
+      'balance': 3
+    }
+    if house.lower() not in houses_to_value.keys():
+      return failure("You must set a valid hypesquad type.\nValid houses: [#9C84EF]Bravery[/#9C84EF], [#F47B67]Brilliance[/#F47B67], [#45DDC0]Balance[/#45DDC0].", header = 'HypeSquad Changer')
+    headers = {
+        'Authorization': self.data['token'],
+        'user-agent': 'Mozilla/5.0'
+    }
+    ID = 0
+    for key, value in houses_to_value.items():
+      if key == house.lower():
+        ID = value
+    json_ = {
+      'house_id': ID
+    }
+    response = requests.post('https://discord.com/api/v9/hypesquad/online', headers = headers, json = json_)
+    try:
+      data = response.json()
+    except:
+      pass
+    else:
+      if data['retry_after']:
+        failure(f"Bot is being ratelimited. Please retry after {data['retry_after']}.", header = "HypeSquad Changer")
+        self.bot.hype_safe = False
+        await asyncio.sleep(float(data['retry_after']))
+        self.bot.hype_safe = True
+        return
+    success(f"Changed the HypeSquad to {house.title()}", header = 'HypeSquad Changer')
 
 async def setup(bot):
   await bot.add_cog(utility(bot))
