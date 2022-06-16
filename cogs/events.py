@@ -46,6 +46,8 @@ class events(commands.Cog):
 
   @Cog.listener("on_message_delete")
   async def deleted_log(self, message : discord.Message):
+    if message.channel.id in self.data['blacklisted_channels']:
+      return
     if (len(message.clean_content) > 0
     and message.author.id != self.bot.user.id
     and message.author.id not in self.data['owner_ids']):
