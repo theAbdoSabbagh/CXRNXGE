@@ -1,3 +1,5 @@
+import asyncio, time, discord, random
+
 from discord.ext import commands
 from discord.ext.commands import Cog, command, is_owner, guild_only
 
@@ -6,7 +8,6 @@ from rich.progress import track
 
 from utils.useful import custom, get_data, success, failure, auto_bump
 
-import asyncio, time, discord, random
 
 
 class utility(commands.Cog):
@@ -18,7 +19,7 @@ class utility(commands.Cog):
     self.sleep_time_high = [2, 2.2, 2.4, 2.6, 2.8]
     self.sleep_time_low = [1, 1.2, 1.4, 1.6, 1.8]
 
-  @command(aliases = ["guildsack"])
+  @command(aliases = ["guildsack"], help = "Marks all guilds as read.")
   @is_owner()
   async def ackguilds(self, ctx):
     try: await ctx.message.delete()
@@ -28,7 +29,7 @@ class utility(commands.Cog):
       await asyncio.sleep(random.choice(self.sleep_time_low))
     success("All guilds marked as read.", header = "Guilds Ack")
 
-  @command(aliases = ['rmfriends', 'rmf'])
+  @command(aliases = ['rmfriends', 'rmf'], help = "Removes all friends.")
   @is_owner()
   async def removefriends(self, ctx):
     try: await ctx.message.delete()
@@ -38,7 +39,7 @@ class utility(commands.Cog):
       await asyncio.sleep(random.choice(self.sleep_time_low))
     success("Removed all friends.", header = "Remove Friends")
   
-  @command(aliases = ['leavegroups', 'leavegdms', 'lgdm'])
+  @command(aliases = ['leavegroups', 'leavegdms', 'lgdm'], help = "Leaves all Group DMs.")
   @is_owner()
   async def leavegroupdms(self, ctx):
     try: await ctx.message.delete()
@@ -49,7 +50,7 @@ class utility(commands.Cog):
         await asyncio.sleep(random.choice(self.sleep_time_high))
     success("Left all group DMs.", header = "Leave Group DMs")
 
-  @command(aliases = ['abump', 'autob'])
+  @command(aliases = ['abump', 'autob'], help = "Automatic bumping. Make sure to include the prefix within the command argument.")
   @is_owner()
   @guild_only()
   async def autobump(self, ctx, command : str, delay : int):
