@@ -1,25 +1,38 @@
 import asyncio, time, os, json, discord
 
-from rich import print
+from rich import print, box
+
+original_data = """{
+  "antiscam": true,
+  "blacklisted_channels": [],
+  "deleted": true,
+  "ignore_bots": true,
+  "log_all": false,
+  "logged_channels": [],
+  "logged_guilds": [],
+  "nitrosnipe": true,
+  "owner_ids": [],
+  "prefix": "",
+  "token": ""
+}"""
 
 def get_version():
     return '0.1'
 
 def get_data():
-    original_data = """{
-    "prefix" : "",
-    "owner_ids": [],
-    "token": "",
-    "logged_guilds": [],
-    "logged_channels": [],
-    "blacklisted_channels": []
-}"""
     if not os.path.isfile('config.json'):
         with open("config.json", "w+") as file:
             file.write(original_data)
     with open('config.json', 'r+') as file:
         data = json.loads(file.read())
     return data
+
+def save_data(data):
+    if not os.path.isfile('config.json'):
+        with open("config.json", "w+") as file:
+            file.write(original_data)
+    with open("config.json", "w+") as file:
+        file.write(json.dumps(data, indent = 2, sort_keys = True))
 
 def success(text : str, timestamp : bool = True, header = None):
     header_ = 'Success' if header is None else f'{header} | Success'
@@ -36,8 +49,10 @@ def cmd_error(text : str, timestamp : bool = True, header = None):
     text = str(text).replace('\n', f"\n[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] \[{header_}] " if timestamp else f"\n\[{header_}] ")
     print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold red]\[{header_}] {text}[/bold red]" if timestamp else f"[bold red]\[{header_}] {text}[/bold red]")
 
-def custom(text : str, timestamp : bool = True, color = 'blue'):
-    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white] [bold {color}]{text}[/bold {color}]" if timestamp else f"[bold {color}]{text}[/bold {color}]")
+def custom(text : str, timestamp : bool = True, color = 'blue', header = None):
+    header_ = '' if header is None else f' \[{header}] '
+    text = str(text).replace('\n', f"\n[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white]{header_}" if timestamp else f"\n{header_[1:]}")
+    print(f"[bold white]{time.strftime('[%H:%M:%S]')}:[/bold white][bold {color}]{header_}{text}[/bold {color}]" if timestamp else f"[bold {color}]{header_}{text}[/bold {color}]")
 
 
 async def auto_bump(channel : discord.TextChannel, command : str, delay : int):
