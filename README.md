@@ -10,6 +10,9 @@
 - Automation commands.
 - HypeSquad changer.
 - Advanced error handler.
+- Toggleable features.
+- Advanced & clean logging.
+- Extreme customizability.
 - And many more!
 
 ## Installation & Usage
