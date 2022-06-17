@@ -1,8 +1,13 @@
 {
-    "token": "",
-    "prefix" : "",
-    "owner_ids": [],
-    "blacklisted_channels": [],
-    "logged_guilds": [],
-    "logged_channels": []
+  "antiscam": true,
+  "blacklisted_channels": [],
+  "deleted": true,
+  "ignore_bots": true,
+  "log_all": false,
+  "logged_channels": [],
+  "logged_guilds": [],
+  "nitrosnipe": true,
+  "owner_ids": [],
+  "prefix": "",
+  "token": ""
 }
