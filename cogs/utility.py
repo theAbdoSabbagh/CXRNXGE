@@ -6,7 +6,7 @@ from discord.ext.commands import Cog, command, is_owner, guild_only
 from rich import print
 from rich.progress import track
 
-from utils.useful import custom, get_data, success, failure, auto_bump
+from utils.useful import custom, get_data, save_data, success, failure, auto_bump
 
 
 
@@ -100,6 +100,40 @@ class utility(commands.Cog):
         self.bot.hype_safe = True
         return
     success(f"Changed the HypeSquad to {house.title()}", header = 'HypeSquad Changer')
+  
+  @command(help = "Disables the \"Nitro Sniper\".")
+  @is_owner()
+  async def nitrosnipe(self, ctx):
+    try: await ctx.message.delete()
+    except: pass
+    data = get_data()
+    previous_state = data['nitrosnipe']
+    data['nitrosnipe'] = not data['nitrosnipe']
+    save_data(data)
+    success(f"Disabled this feature." if previous_state is True else "Enabled this feature", header = "Nitro Sniper")
+  
+  @command(help = "Disables the \"Anti Scam Links\" Feature.")
+  @is_owner()
+  async def antiscam(self, ctx):
+    try: await ctx.message.delete()
+    except: pass
+    data = get_data()
+    previous_state = data['antiscam']
+    data['antiscam'] = not data['antiscam']
+    save_data(data)
+    success(f"Disabled this feature." if previous_state is True else "Enabled this feature", header = "Anti Scam Links")
+  
+  @command(help = "Disables the \"Deleted Messages Logging\" Feature.")
+  @is_owner()
+  async def deleted(self, ctx):
+    try: await ctx.message.delete()
+    except: pass
+    data = get_data()
+    previous_state = data['deleted']
+    data['deleted'] = not data['deleted']
+    save_data(data)
+    success(f"Disabled this feature." if previous_state is True else "Enabled this feature", header = "Deleted Messages Logging")
+
 
 async def setup(bot):
   await bot.add_cog(utility(bot))
